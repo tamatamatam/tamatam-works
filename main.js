@@ -92,6 +92,7 @@ const works = [...document.querySelectorAll('section.project')].map(section => {
     const span = document.createElement('span');
     span.className = 'ch';
     span.textContent = ch;
+    span.addEventListener('click', () => section.scrollIntoView({ behavior: 'smooth' }));   // the next name is clickable too
     return span;
   });
   titles.append(line, ...letters);
@@ -212,7 +213,7 @@ new IntersectionObserver(([e]) => {
 // 4. Cursor: a thin line arrow that follows the mouse and turns neon green over anything clickable
 const cursor = document.getElementById('cursor');
 const fineMouse = matchMedia('(hover: hover) and (pointer: fine)');
-const CLICKABLE = 'a, button, .titles .line';
+const CLICKABLE = 'a, button, .titles .line, .titles .ch';
 if (fineMouse.matches) {
   document.documentElement.classList.add('has-cursor');
   document.addEventListener('mousemove', e => {

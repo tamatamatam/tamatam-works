@@ -393,5 +393,5 @@ img { display: block; width: 100%; height: auto; }
 }
 
 /* contact links under the tamatam text */
-.info .links { list-style: none; display: flex; flex-wrap: wrap; gap: 6px 20px; margin-top: 16px; }
+.info .links { list-style: none; display: flex; flex-wrap: wrap; gap: 6px 20px; margin: 4px 0 16px; }
 .info .links a { text-decoration: underline; text-underline-offset: 3px; }
