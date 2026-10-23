@@ -383,3 +383,13 @@ img { display: block; width: 100%; height: auto; }
   .strip { scroll-snap-type: x proximity; }
   .strip img.wide { height: 58svh; width: auto; max-width: none; }
 }
+
+/* Safari: keep each row inside its own box, so a picture can never spill into the gap below */
+@media (min-width: 901px) {
+  .strip > .row { overflow: hidden; }
+  .crop img { min-height: 0; max-height: 100%; }
+}
+
+/* contact links under the tamatam text */
+.info .links { list-style: none; display: flex; flex-wrap: wrap; gap: 6px 20px; margin-top: 16px; }
+.info .links a { text-decoration: underline; text-underline-offset: 3px; }
