@@ -347,7 +347,7 @@ img { display: block; width: 100%; height: auto; }
 
 /* Phone: each project's pictures become one strip you swipe left and right.
    On desktop the strip is invisible and the grid stays as it is. */
-.strip { display: contents; }
+.strip { display: grid; gap: var(--gap); }   /* desktop: rows stacked with the same gap as the columns */
 @media (max-width: 900px) {
   .strip {
     display: flex;
@@ -378,6 +378,8 @@ img { display: block; width: 100%; height: auto; }
   .strip .row.five img:last-child { display: block; }
 }
 @media (max-width: 900px) {
-  .strip { align-items: center; }
-  .strip img.wide { height: auto; width: 84vw; max-width: 84vw; }
+  /* landscape pictures get the same height as the rest and run wider than the screen,
+     so you swipe across them */
+  .strip { scroll-snap-type: x proximity; }
+  .strip img.wide { height: 58svh; width: auto; max-width: none; }
 }
