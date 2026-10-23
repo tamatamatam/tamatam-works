@@ -284,12 +284,12 @@ img { display: block; width: 100%; height: auto; }
   .cursor.hot path { stroke-width: 3; }
 }
 
-/* Category colours: merch = blue, branding = red, photography = purple, digital = dark spruce */
+/* Category colours: merch = blue, branding = red, photography = purple, digital = green */
 :root {
   --c-merch: #000dff;
   --c-branding: #ff0000;
   --c-photography: #8a2be2;
-  --c-digital: #104e2a;
+  --c-digital: #008a45;
 }
 .kw[data-kw="merch"]       { --c: var(--c-merch); }
 .kw[data-kw="branding"]    { --c: var(--c-branding); }
@@ -343,4 +343,41 @@ img { display: block; width: 100%; height: auto; }
 @media (prefers-reduced-motion: reduce) {
   .toast { animation: fade 1s ease-out forwards; transform: translateX(-50%); }
   @keyframes fade { 0%, 70% { opacity: 1; } 100% { opacity: 0; } }
+}
+
+/* Phone: each project's pictures become one strip you swipe left and right.
+   On desktop the strip is invisible and the grid stays as it is. */
+.strip { display: contents; }
+@media (max-width: 900px) {
+  .strip {
+    display: flex;
+    gap: var(--gap);
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    margin: 0 calc(var(--m) * -1);          /* run edge to edge */
+    padding: 0 var(--m);
+    scroll-padding: 0 var(--m);
+    scrollbar-width: none;
+    -webkit-overflow-scrolling: touch;
+  }
+  .strip::-webkit-scrollbar { display: none; }
+  /* rows and wrappers dissolve, so every picture becomes its own slide */
+  .strip .row, .strip .vlna-head, .strip .vlna-side, .strip .vlna-pair { display: contents; }
+  .strip img, .strip video, .strip .panel, .strip .tile, .strip .zoom {
+    flex: 0 0 auto;
+    height: 58svh;
+    width: auto;
+    max-width: 84vw;
+    object-fit: cover;
+    scroll-snap-align: start;
+  }
+  .strip .panel img, .strip .tile img, .strip .zoom img { height: 100%; max-width: none; flex: none; }
+  .strip .panel { width: 84vw; padding: 20px; }
+  .strip .panel img { width: 100%; object-fit: contain; }
+  .strip .tile { aspect-ratio: 1 / 1; width: auto; }
+  .strip .row.five img:last-child { display: block; }
+}
+@media (max-width: 900px) {
+  .strip { align-items: center; }
+  .strip img.wide { height: auto; width: 84vw; max-width: 84vw; }
 }
